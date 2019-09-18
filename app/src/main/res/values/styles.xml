@@ -1,0 +1,23 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FunctionTipText" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:background">@drawable/bg_function_description</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="FunctionResultText" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:background">@drawable/bg_function_result</item>
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+
+</resources>
