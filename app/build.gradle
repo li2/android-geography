@@ -41,7 +41,6 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.androidx.core_ktx
     implementation libs.androidx.constraintlayout
-    implementation libs.androidx.multidex
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

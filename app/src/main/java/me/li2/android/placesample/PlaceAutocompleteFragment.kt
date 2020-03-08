@@ -24,14 +24,13 @@ class PlaceAutocompleteFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_place_autocomplete, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_place_autocomplete, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         placeAutoComplete = PlaceAutoComplete(view.context, view.context.getString(
-            R.string.google_api_key
+                R.string.google_api_key
         ))
 
         compositeDisposable += btn_launch_autocomplete.clicks().subscribe {
