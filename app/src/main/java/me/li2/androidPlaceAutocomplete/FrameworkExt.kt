@@ -7,21 +7,7 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import me.li2.android.place.PlaceAutoComplete
-import org.kodein.di.Kodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
 import java.util.concurrent.TimeUnit
-
-
-object MainComponent {
-    val appModule = Kodein.Module("app module") {
-        bind<PlaceAutoComplete>() with provider {
-            PlaceAutoComplete(instance(), App.context.getString(R.string.google_api_key))
-        }
-    }
-}
 
 fun <T> Observable<T>.forUi(): Observable<T> =
         this.observeOn(AndroidSchedulers.mainThread())

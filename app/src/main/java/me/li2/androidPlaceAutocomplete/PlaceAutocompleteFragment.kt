@@ -14,17 +14,12 @@ import kotlinx.android.synthetic.main.fragment_place_autocomplete.*
 import me.li2.android.place.AddressComponents
 import me.li2.android.place.PlaceAutoComplete
 import me.li2.androidPlaceAutocomplete.databinding.FragmentPlaceAutocompleteBinding
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.generic.instance
 
-class PlaceAutocompleteFragment : Fragment(), KodeinAware {
-
-    override val kodein by closestKodein(App.context)
+class PlaceAutocompleteFragment : Fragment() {
 
     private val compositeDisposable = CompositeDisposable()
     private lateinit var binding: FragmentPlaceAutocompleteBinding
-    private val autoCompleteUtil by instance<PlaceAutoComplete>()
+    private lateinit var placeAutoComplete: PlaceAutoComplete
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -34,8 +29,10 @@ class PlaceAutocompleteFragment : Fragment(), KodeinAware {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        placeAutoComplete = PlaceAutoComplete(view.context, view.context.getString(R.string.google_api_key))
+
         compositeDisposable += btn_launch_autocomplete.clicks().subscribe {
-            autoCompleteUtil.launchPlaceAutocompleteActivity(requireActivity())
+            placeAutoComplete.launchPlaceAutocompleteActivity(requireActivity())
                     .subscribeBy(onSuccess = { place ->
                         val result = AddressComponents.fromPlace(place)
                         binding.autocompleteActivityResult = "${result.suburbAndPostcode}\n${result.fullAddress}"
@@ -46,7 +43,7 @@ class PlaceAutocompleteFragment : Fragment(), KodeinAware {
 
         compositeDisposable += et_autocomplete_query
                 .queryTextChanges()
-                .switchMap { query -> autoCompleteUtil.getPlacePredictions(query) }
+                .switchMap { query -> placeAutoComplete.getPlacePredictions(query) }
                 .forUi()
                 .subscribeBy(onNext = { predictions ->
                     val allPredictionsText = predictions.joinToString("\n") { it.getFullText(null) }
@@ -54,5 +51,10 @@ class PlaceAutocompleteFragment : Fragment(), KodeinAware {
                 }, onError = {
                     toast(it.message.toString())
                 })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        compositeDisposable.dispose()
     }
 }
