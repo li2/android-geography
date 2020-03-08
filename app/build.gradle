@@ -35,9 +35,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation(project(':place')) {
-        transitive = true
-    }
+    implementation project(':place')
 
     implementation libs.jetbrains.kotlin_stdlib_jdk7
     implementation libs.androidx.appcompat
