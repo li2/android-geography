@@ -11,7 +11,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_place_autocomplete.*
-import me.li2.androidPlaceAutocomplete.PlaceAutoCompleteUtil.Companion.parsePlace
+import me.li2.android.place.AddressComponents
+import me.li2.android.place.PlaceAutoComplete
 import me.li2.androidPlaceAutocomplete.databinding.FragmentPlaceAutocompleteBinding
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -23,7 +24,7 @@ class PlaceAutocompleteFragment : Fragment(), KodeinAware {
 
     private val compositeDisposable = CompositeDisposable()
     private lateinit var binding: FragmentPlaceAutocompleteBinding
-    private val autoCompleteUtil by instance<PlaceAutoCompleteUtil>()
+    private val autoCompleteUtil by instance<PlaceAutoComplete>()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -36,8 +37,8 @@ class PlaceAutocompleteFragment : Fragment(), KodeinAware {
         compositeDisposable += btn_launch_autocomplete.clicks().subscribe {
             autoCompleteUtil.launchPlaceAutocompleteActivity(requireActivity())
                     .subscribeBy(onSuccess = { place ->
-                        val result = parsePlace(place)
-                        binding.autocompleteActivityResult = "${result.getSuburbAndPostcode()}\n${result.fullAddress}"
+                        val result = AddressComponents.fromPlace(place)
+                        binding.autocompleteActivityResult = "${result.suburbAndPostcode}\n${result.fullAddress}"
                     }, onError = {
                         toast(it.message.toString())
                     })
@@ -46,6 +47,7 @@ class PlaceAutocompleteFragment : Fragment(), KodeinAware {
         compositeDisposable += et_autocomplete_query
                 .queryTextChanges()
                 .switchMap { query -> autoCompleteUtil.getPlacePredictions(query) }
+                .forUi()
                 .subscribeBy(onNext = { predictions ->
                     val allPredictionsText = predictions.joinToString("\n") { it.getFullText(null) }
                     binding.autocompletePredictionsResult = allPredictionsText
