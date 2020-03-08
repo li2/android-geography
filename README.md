@@ -12,7 +12,7 @@ This library is a wrapper of Google Place SDK in Rx:
 
 - Use Rx to break with the OnActivityResult and callback implementation.
 
-<img width="300" alt="android-form-validation" src="https://github.com/li2/android-place/blob/develop/place_autocomplete.gif">
+<img width="300" alt="android-form-validation" src="https://github.com/li2/android-place/blob/master/place_autocomplete.gif">
 
 You can read [my article on Medium](https://medium.com/@li2/android-practice-google-place-autocomplete-search-in-rx-79686271d840) for more details.
 
@@ -20,7 +20,7 @@ You can read [my article on Medium](https://medium.com/@li2/android-practice-goo
 
 ## Usage
 
-[PlaceAutocompleteFragment](https://github.com/li2/android-place/blob/develop/app/src/main/java/me/li2/android/placesample/PlaceAutocompleteFragment.kt)
+[PlaceAutocompleteFragment](https://github.com/li2/android-place/blob/master/app/src/main/java/me/li2/android/placesample/PlaceAutocompleteFragment.kt)
 
 ```kotlin
 val placeAutoComplete = PlaceAutoComplete(context, context.getString(R.string.google_api_key))
