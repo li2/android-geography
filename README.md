@@ -20,7 +20,7 @@ You can read [my article on Medium](https://medium.com/@li2/android-practice-goo
 
 ## Usage
 
-[PlaceAutocompleteFragment](..develop/app/src/main/java/me/li2/android/placesample/PlaceAutocompleteFragment.kt)
+[PlaceAutocompleteFragment](https://github.com/li2/android-place/blob/develop/app/src/main/java/me/li2/android/placesample/PlaceAutocompleteFragment.kt)
 
 ```kotlin
 val placeAutoComplete = PlaceAutoComplete(context, context.getString(R.string.google_api_key))
