@@ -19,6 +19,7 @@ import io.reactivex.Single
 
 class PlaceAutoCompleteUtil(private val context: Context, apiKey: String) {
 
+    // affected by language setting
     private val defaultCountryCode
         get() = context.resources.configuration.locale.country
 
