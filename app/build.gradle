@@ -10,7 +10,7 @@ android {
         enabled = true
     }
     defaultConfig {
-        applicationId "me.li2.androidPlaceAutocomplete"
+        applicationId 'me.li2.android.placesample'
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1

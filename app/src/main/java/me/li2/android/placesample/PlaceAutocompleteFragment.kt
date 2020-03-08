@@ -1,4 +1,4 @@
-package me.li2.androidPlaceAutocomplete
+package me.li2.android.placesample
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_place_autocomplete.*
 import me.li2.android.place.AddressComponents
 import me.li2.android.place.PlaceAutoComplete
-import me.li2.androidPlaceAutocomplete.databinding.FragmentPlaceAutocompleteBinding
+import me.li2.android.placesample.databinding.FragmentPlaceAutocompleteBinding
 
 class PlaceAutocompleteFragment : Fragment() {
 
@@ -24,12 +24,15 @@ class PlaceAutocompleteFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_place_autocomplete, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_place_autocomplete, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        placeAutoComplete = PlaceAutoComplete(view.context, view.context.getString(R.string.google_api_key))
+        placeAutoComplete = PlaceAutoComplete(view.context, view.context.getString(
+            R.string.google_api_key
+        ))
 
         compositeDisposable += btn_launch_autocomplete.clicks().subscribe {
             placeAutoComplete.launchPlaceAutocompleteActivity(requireActivity())

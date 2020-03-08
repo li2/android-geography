@@ -1,4 +1,4 @@
-package me.li2.androidPlaceAutocomplete
+package me.li2.android.placesample
 
 import android.widget.EditText
 import android.widget.Toast

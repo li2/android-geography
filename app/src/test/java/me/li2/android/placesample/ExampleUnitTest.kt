@@ -1,8 +1,7 @@
-package me.li2.androidPlaceAutocomplete
+package me.li2.android.placesample
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
