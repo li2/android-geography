@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--https://developers.google.com/places/web-service/get-api-key-->
-    <string name="google_api_key" translatable="false">Get an API key</string>
+    <string name="google_api_key" translatable="false">@string/your_api_key</string>
 </resources>
