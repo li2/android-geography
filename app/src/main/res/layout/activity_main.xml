@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fragment android:id="@+id/fragment"
-    android:name="me.li2.androidPlaceAutocomplete.PlaceAutocompleteFragment"
+    android:name="me.li2.android.placesample.PlaceAutocompleteFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />

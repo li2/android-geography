@@ -1,4 +1,4 @@
-package me.li2.androidPlaceAutocomplete
+package me.li2.android.placesample
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("me.li2.androidPlaceAutocomplete", appContext.packageName)
+        assertEquals("me.li2.android.placesample", appContext.packageName)
     }
 }
