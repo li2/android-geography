@@ -29,9 +29,7 @@ class PlaceAutocompleteFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        placeAutoComplete = PlaceAutoComplete(view.context, view.context.getString(
-                R.string.google_api_key
-        ))
+        placeAutoComplete = PlaceAutoComplete(view.context, view.context.getString(R.string.google_api_key))
 
         compositeDisposable += btn_launch_autocomplete.clicks().subscribe {
             placeAutoComplete.launchPlaceAutocompleteActivity(requireActivity())
