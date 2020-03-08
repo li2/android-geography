@@ -20,6 +20,19 @@ import com.petarmarijanovic.rxactivityresult.RxActivityResult
 import io.reactivex.Observable
 import io.reactivex.Single
 
+/**
+ * Search places with Google Places SDK in the following aspects:
+ *
+ * (1) two options to search place;
+ * (2) use Rx to break with the OnActivityResult, callback implementation;
+ *
+ * @param context
+ * @param apiKey google api key.
+ *
+ * @see <a href="https://developers.google.com/places/web-service/get-api-key">Get an API Key</a>
+ * @see <a href="https://medium.com/@li2/android-practice-google-place-autocomplete-search-in-rx-79686271d840">Place Autocomplete in Rx</a>
+ * @see <a href="https://developers.google.com/places/android-sdk/autocomplete">Place Autocomplete: official doc</a>
+ */
 class PlaceAutoComplete(private val context: Context, apiKey: String) {
 
     // related to language setting
@@ -35,6 +48,18 @@ class PlaceAutoComplete(private val context: Context, apiKey: String) {
         placesClient = Places.createClient(context)
     }
 
+    /**
+     * Launch built-in autocomplete activity
+     *
+     * @param activity
+     * @param initialQuery the initial query in the search input.
+     * @param countryCode the country to restrict results to. This must be a list of ISO 3166-1 Alpha-2 country
+     *                      codes (case insensitive). If no countries are set, no country filtering will take place.
+     * @param typeFilter Filters the autocomplete results to the given place type.
+     * @param fields the fields of the place to be requested.
+     * @return A Place encapsulates information about a physical location, including its name, full address,
+     *         latLng, address components like street number, route, suburb/locality, country, postal code if available.
+     */
     fun launchPlaceAutocompleteActivity(
             activity: FragmentActivity,
             initialQuery: String = "",
@@ -61,6 +86,17 @@ class PlaceAutoComplete(private val context: Context, apiKey: String) {
                 }
     }
 
+    /**
+     * Get a list of place predictions.
+     *
+     * @param query
+     * @param countryCode the country to restrict results to. This must be a list of ISO 3166-1 Alpha-2 country
+     *                      codes (case insensitive). If no countries are set, no country filtering will take place.
+     * @param typeFilter Filters the autocomplete results to the given place type.
+     * @param locationBounds Sets the location where autocomplete predictions are to be biased towards.
+     * @return A list of autocomplete suggestion of places, which includes the description of the suggested place
+     *          as well as basic details including place ID and types.
+     */
     fun getPlacePredictions(
             query: String,
             countryCode: String = defaultCountryCode,
@@ -90,6 +126,13 @@ class PlaceAutoComplete(private val context: Context, apiKey: String) {
         }
     }
 
+    /**
+     * Get the details of a place.
+     *
+     * @param placeId the unique ID of the place to be requested. see [getId()](https://developers.google.com/places/android-sdk/reference/com/google/android/libraries/places/api/model/Place#getId())
+     *                  for more details.
+     * @return A place.
+     */
     fun getPlaceById(placeId: String): Observable<Place> {
         return Observable.create { emitter ->
             val request = FetchPlaceRequest.builder(placeId, PLACE_DEFAULT_FIELDS).build()
