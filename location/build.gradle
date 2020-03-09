@@ -1,23 +1,18 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion vCompileSdk
 
-    dataBinding {
-        enabled = true
-    }
-
     defaultConfig {
-        applicationId 'me.li2.android.placesample'
         minSdkVersion vMinSdk
         targetSdkVersion vTargetSdk
         versionCode 1
-        versionName "1.0.0"
+        versionName "0.0.0"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -27,37 +22,28 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':place')
-    implementation project(':location')
 
-    implementation libs.jetbrains.kotlin_stdlib_jdk7
-    implementation libs.androidx.appcompat
-    implementation libs.androidx.core_ktx
-    implementation libs.androidx.constraintlayout
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$vKotlin"
+    implementation "androidx.appcompat:appcompat:$rootProject.vAndroidxAppcompat"
+    implementation "androidx.core:core-ktx:$rootProject.vAndroidxCoreKtx"
 
     testImplementation "junit:junit:$rootProject.vJunit"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.vAndroidxTestJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.vAndroidxTestEspresso"
 
-    //Google
-    implementation "com.google.android.material:material:$rootProject.vGoogleMaterial"
+    //Google Play Service
+    implementation "com.google.android.gms:play-services-base:$vGooglePlayService"
+    implementation "com.google.android.gms:play-services-location:17.0.0"
 
     //Rx
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.vRxAndroid"
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.vRxKotlin"
-    implementation "com.jakewharton.rxbinding3:rxbinding:$rootProject.vRxBinding"
+    implementation "com.petarmarijanovic:rx-activity-result:$rootProject.vRxActivityResult"
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rootProject.vRxPermission"
 
     //Timber
     implementation "com.jakewharton.timber:timber:$vTimber"
