@@ -3,17 +3,18 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion vCompileSdk
+
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 29
+        minSdkVersion vMinSdk
+        targetSdkVersion vTargetSdk
         versionCode 1
         versionName "0.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,18 +26,21 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$vKotlin"
+    implementation "androidx.appcompat:appcompat:$rootProject.vAndroidxAppcompat"
+    implementation "androidx.core:core-ktx:$rootProject.vAndroidxCoreKtx"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "junit:junit:$rootProject.vJunit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.vAndroidxTestJunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.vAndroidxTestEspresso"
 
     //Google Place SDK
-    api "com.google.android.libraries.places:places:2.2.0"
+    api "com.google.android.libraries.places:places:$rootProject.vGooglePlaces"
 
     //Rx
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-    implementation 'com.petarmarijanovic:rx-activity-result:2.2.1'
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.vRxAndroid"
+    implementation "com.petarmarijanovic:rx-activity-result:$rootProject.vRxActivityResult"
+
+    //Timber
+    implementation "com.jakewharton.timber:timber:$vTimber"
 }
