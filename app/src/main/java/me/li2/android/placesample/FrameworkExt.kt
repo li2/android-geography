@@ -1,7 +1,9 @@
 package me.li2.android.placesample
 
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
@@ -13,7 +15,7 @@ fun <T> Observable<T>.forUi(): Observable<T> =
         this.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
 
-fun Fragment.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+fun <T> Observable<T>.throttleFirstShort() = this.throttleFirst(500L, TimeUnit.MILLISECONDS)!!
 
 /**
  * Return query text changes observable.
@@ -28,4 +30,11 @@ fun EditText.queryTextChanges(): Observable<String> {
             .filter { it.isNotBlank() }
             .debounce(300, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
+}
+
+fun Fragment.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+@BindingAdapter("android:visibility")
+fun setViewVisibility(view: View, value: Boolean?) {
+        view.visibility = if (value == true) View.VISIBLE else View.GONE
 }

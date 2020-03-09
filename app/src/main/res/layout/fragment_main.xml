@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="latLng"
+            type="com.google.android.gms.maps.model.LatLng" />
+
+        <variable
+            name="suburbAndPostCode"
+            type="String" />
+
+        <variable
+            name="address"
+            type="String" />
+
+        <variable
+            name="isLastKnownLocationLoading"
+            type="Boolean" />
+
+        <variable
+            name="autocompleteActivityResult"
+            type="String" />
+
+        <variable
+            name="autocompletePredictionsResult"
+            type="String" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:columnCount="1"
+            android:padding="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_latlng_usage"
+                style="@style/FunctionTipText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Geocoder class can be used to extract address, suburb, postcode, country, etc from latLng, we create fancy extension function LatLng.getXxx() to make it easier." />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_latlng"
+                style="@style/FunctionResultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="LatLng"
+                android:text="@{latLng.toString()}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_suburb_and_postcode"
+                style="@style/FunctionResultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Suburb and Postcode"
+                android:text="@{suburbAndPostCode}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_address"
+                style="@style/FunctionResultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:text="@{address}" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_get_last_known_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get Last Known Location" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{isLastKnownLocationLoading}" />
+
+            <Space android:layout_height="32dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/FunctionTipText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 1: Launch built-in autocomplete activity" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_on_autocomplete_activity_result"
+                style="@style/FunctionResultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Autocomplete Activity Result"
+                android:text="@{autocompleteActivityResult}" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_launch_autocomplete_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Launch Autocomplete Activity" />
+
+            <Space android:layout_height="32dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/FunctionTipText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 2: Get place predictions programmatically" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_find_autocomplete_predictions_result"
+                style="@style/FunctionResultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Find Autocomplete Predictions Result"
+                android:text="@{autocompletePredictionsResult}" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_autocomplete_query"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Query Location"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_autocomplete_query"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space android:layout_height="32dp" />
+
+        </GridLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
