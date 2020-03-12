@@ -70,8 +70,6 @@ LastKnownLocationUtils.requestLastKnownLocation(context)
         GeocoderUtils.getAddressComponents(context, location.latitude, location.longitude)
     }, onError = { exception ->
     })
-
-  
 ```
 
 
@@ -79,8 +77,8 @@ LastKnownLocationUtils.requestLastKnownLocation(context)
 ## Download
 
 ```gradle
-implementation 'com.github.li2:android-location:latest_version'
-implementation 'com.github.li2:android-place:latest_version'
+implementation 'com.github.li2.android-geography:location:latest_version'
+implementation 'com.github.li2.android-geography:place:latest_version'
 ```
 
 
@@ -88,7 +86,6 @@ implementation 'com.github.li2:android-place:latest_version'
 ## License
 
 ```
-
     Copyright (C) 2020 Weiyi Li
 
     Licensed under the Apache License, Version 2.0 (the "License");
