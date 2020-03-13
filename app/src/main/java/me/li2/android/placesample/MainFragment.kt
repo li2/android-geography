@@ -89,7 +89,7 @@ class MainFragment : Fragment() {
                 })
 
         val marker1 = MarkerInfo("blue", listOf("62.107733,-145.5419"), 'S')
-        val marker2 = MarkerInfo("yellow", listOf("Tok, AK"), 'C', icon = "https://raw.githubusercontent.com/li2/android-geography/map/panda.png")
+        val marker2 = MarkerInfo("yellow", listOf("Tok, AK"), 'C', icon = "https://raw.githubusercontent.com/li2/android-geography/blob/master/panda.png")
         val marker3 = MarkerInfo("green", listOf("Delta Junction, AK"), size = MarkerInfo.MarkerSize.TINY)
         binding.mapStaticUrl = generateMapStaticImageUrl(
             apiKey = apiKey,
