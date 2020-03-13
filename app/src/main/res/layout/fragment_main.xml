@@ -28,6 +28,10 @@
         <variable
             name="autocompletePredictionsResult"
             type="String" />
+
+        <variable
+            name="mapStaticUrl"
+            type="String" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -139,6 +143,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space android:layout_height="32dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:src="@{mapStaticUrl}"
+                tools:ignore="ContentDescription"
+                tools:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars"
+                tools:srcCompat="@tools:sample/backgrounds/scenic[9]" />
 
         </GridLayout>
 
