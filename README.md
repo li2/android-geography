@@ -78,6 +78,7 @@ LastKnownLocationUtils.requestLastKnownLocation(context)
 
 ```gradle
 implementation 'com.github.li2.android-geography:location:latest_version'
+implementation 'com.github.li2.android-geography:maps:latest_version'
 implementation 'com.github.li2.android-geography:place:latest_version'
 ```
 
