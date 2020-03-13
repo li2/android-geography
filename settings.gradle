@@ -1,4 +1,5 @@
-rootProject.name='Android Place Sample'
+rootProject.name='Android Place&Location Sample'
 include ':app'
-include ':place'
 include ':location'
+include ':maps'
+include ':place'

@@ -17,6 +17,9 @@ import me.li2.android.location.RequestLocationResult
 import me.li2.android.location.ifLocationAllowed
 import me.li2.android.location.openAppSettings
 import me.li2.android.location.openSystemLocationSetting
+import me.li2.android.maps.MapType
+import me.li2.android.maps.MapsStaticUtil.generateMapStaticImageUrl
+import me.li2.android.maps.MarkerInfo
 import me.li2.android.place.GeocoderUtils
 import me.li2.android.place.PlaceAutoComplete
 import me.li2.android.place.toAddressComponents
@@ -28,6 +31,9 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var placeAutoComplete: PlaceAutoComplete
 
+    private val apiKey: String
+        get() = context?.getString(R.string.google_api_key).orEmpty()
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,7 +42,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        placeAutoComplete = PlaceAutoComplete(view.context, view.context.getString(R.string.google_api_key))
+        placeAutoComplete = PlaceAutoComplete(view.context, apiKey)
 
         compositeDisposable += btn_get_last_known_location.clicks().throttleFirstShort().subscribe {
             activity?.ifLocationAllowed(onError = {
@@ -81,6 +87,17 @@ class MainFragment : Fragment() {
                 }, onError = {
                     toast(it.message.toString())
                 })
+
+        val marker1 = MarkerInfo("blue", listOf("62.107733,-145.5419"), 'S')
+        val marker2 = MarkerInfo("yellow", listOf("Tok, AK"), 'C', icon = "https://raw.githubusercontent.com/li2/android-geography/blob/master/panda.png")
+        val marker3 = MarkerInfo("green", listOf("Delta Junction, AK"), size = MarkerInfo.MarkerSize.TINY)
+        binding.mapStaticUrl = generateMapStaticImageUrl(
+            apiKey = apiKey,
+            central = "63.259591,-144.667969",
+            mapType = MapType.SATELLITE,
+            markers = listOf(marker1, marker2, marker3),
+            size = "400x400",
+            zoomLevel = 6)
     }
 
     override fun onDestroyView() {
