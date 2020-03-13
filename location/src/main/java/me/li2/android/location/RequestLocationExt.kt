@@ -47,7 +47,7 @@ fun FragmentActivity.openSystemLocationSetting(onResult: (Boolean) -> Unit): Dis
 /**
  * Open application settings page.
  *
- * @param appId application ID: BuildConfig.APPLICATION_ID
+ * @param appId application ID
  */
 fun FragmentActivity.openAppSettings(appId: String) {
      startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$appId")))

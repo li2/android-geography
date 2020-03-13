@@ -57,7 +57,7 @@ class MainFragment : Fragment() {
                     RequestLocationResult.PERMISSION_DENIED,
                     RequestLocationResult.PERMISSION_DENIED_NOT_ASK_AGAIN -> {
                         // location permission denied, go to App settings
-                        activity?.openAppSettings(BuildConfig.APPLICATION_ID)
+                        activity?.openAppSettings(view.context.packageName)
                     }
                     RequestLocationResult.SERVICE_OFF -> {
                         // location service is turned off, go to system settings
@@ -89,7 +89,7 @@ class MainFragment : Fragment() {
                 })
 
         val marker1 = MarkerInfo("blue", listOf("62.107733,-145.5419"), 'S')
-        val marker2 = MarkerInfo("yellow", listOf("Tok, AK"), 'C', icon = "https://raw.githubusercontent.com/li2/android-geography/blob/master/panda.png")
+        val marker2 = MarkerInfo("yellow", listOf("Tok, AK"), 'C', icon = "https://raw.githubusercontent.com/li2/android-geography/master/panda.png")
         val marker3 = MarkerInfo("green", listOf("Delta Junction, AK"), size = MarkerInfo.MarkerSize.TINY)
         binding.mapStaticUrl = generateMapStaticImageUrl(
             apiKey = apiKey,

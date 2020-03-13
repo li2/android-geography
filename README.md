@@ -56,7 +56,7 @@ activity?.ifLocationAllowed(onError = {
         RequestLocationResult.PERMISSION_DENIED,
         RequestLocationResult.PERMISSION_DENIED_NOT_ASK_AGAIN -> {
             // location permission denied, go to App settings
-            activity?.openAppSettings(BuildConfig.APPLICATION_ID)
+            activity?.openAppSettings(context.packageName)
         }
         RequestLocationResult.SERVICE_OFF -> {
             // location service is turned off, go to system settings
