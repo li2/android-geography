@@ -1,4 +1,4 @@
-rootProject.name='Android Place&Location Sample'
+rootProject.name='Place&Location Sample'
 include ':app'
 include ':location'
 include ':maps'
