@@ -12,6 +12,8 @@ import com.petarmarijanovic.rxactivityresult.RxActivityResult
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
+import me.li2.android.common.framework.PermissionResult
+import me.li2.android.common.framework.requestLocationPermission
 
 /**
  * Show location permission ((allow, deny, deny & don't ask again)) and service prompt dialog
@@ -55,12 +57,10 @@ fun FragmentActivity.openAppSettings(appId: String) {
 
 private object RequestLocationUtils {
     fun checkLocationPermissionAndService(activity: FragmentActivity): Observable<RequestLocationResult> {
-        return LocationPermissionUtil.requestLocationPermission(activity)
-                .take(1)
-                .flatMap { permission ->
-                    when {
-                        permission.granted -> {
-                            // permission is granted
+        return activity.requestLocationPermission()
+                .flatMap { permissionResult ->
+                    when (permissionResult) {
+                        PermissionResult.GRANTED -> {
                             if (LocationServiceUtil.isLocationServiceEnabled(activity)) {
                                 Observable.just(RequestLocationResult.ALLOWED)
                             } else {
@@ -73,12 +73,10 @@ private object RequestLocationUtils {
                                 }
                             }
                         }
-                        permission.shouldShowRequestPermissionRationale -> {
-                            // Denied permission without ask never again
+                        PermissionResult.DENIED -> {
                             Observable.just(RequestLocationResult.PERMISSION_DENIED)
                         }
-                        else -> {
-                            // Denied permission with ask never again, need to go to the settings
+                        PermissionResult.DENIED_NOT_ASK_AGAIN -> {
                             Observable.just(RequestLocationResult.PERMISSION_DENIED_NOT_ASK_AGAIN)
                         }
                     }

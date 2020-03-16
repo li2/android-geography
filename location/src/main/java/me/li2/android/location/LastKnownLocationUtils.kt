@@ -13,7 +13,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
-import me.li2.android.location.LocationPermissionUtil.isLocationPermissionEnabled
+import me.li2.android.common.framework.isLocationPermissionGranted
 import me.li2.android.location.LocationServiceUtil.isLocationServiceEnabled
 
 object LastKnownLocationUtils {
@@ -40,7 +40,7 @@ object LastKnownLocationUtils {
             if (!isLocationServiceEnabled(context)) {
                 emitter.onError(LocationServiceTurnedOffException)
             }
-            if (!isLocationPermissionEnabled(context)) {
+            if (!context.isLocationPermissionGranted()) {
                 emitter.onError(LocationPermissionDeniedException)
             }
 
