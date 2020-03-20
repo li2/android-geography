@@ -1,4 +1,4 @@
-rootProject.name='Place&Location Sample'
+rootProject.name='Place&Location Library'
 include ':app'
 include ':location'
 include ':maps'
