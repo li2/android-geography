@@ -27,7 +27,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.github.li2:android-common:07d29276"
+    implementation "com.github.li2:android-common:34e90969"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$vKotlin"
     implementation "androidx.appcompat:appcompat:$rootProject.vAndroidxAppcompat"
@@ -45,7 +45,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.vRxAndroid"
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.vRxKotlin"
     implementation "com.petarmarijanovic:rx-activity-result:$rootProject.vRxActivityResult"
-    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rootProject.vRxPermission"
 
     //Timber
     implementation "com.jakewharton.timber:timber:$vTimber"

@@ -12,8 +12,8 @@ import com.petarmarijanovic.rxactivityresult.RxActivityResult
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
-import me.li2.android.common.framework.PermissionResult
-import me.li2.android.common.framework.requestLocationPermission
+import me.li2.android.common.rx.PermissionResult
+import me.li2.android.common.rx.requestLocationPermission
 
 /**
  * Show location permission ((allow, deny, deny & don't ask again)) and service prompt dialog

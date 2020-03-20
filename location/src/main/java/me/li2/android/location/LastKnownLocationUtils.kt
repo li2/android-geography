@@ -13,7 +13,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
-import me.li2.android.common.framework.isLocationPermissionGranted
+import me.li2.android.common.rx.isLocationPermissionGranted
 import me.li2.android.location.LocationServiceUtil.isLocationServiceEnabled
 
 object LastKnownLocationUtils {
