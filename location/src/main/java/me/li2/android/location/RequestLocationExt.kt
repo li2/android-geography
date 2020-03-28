@@ -7,13 +7,14 @@ package me.li2.android.location
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.petarmarijanovic.rxactivityresult.RxActivityResult
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import me.li2.android.common.rx.PermissionResult
-import me.li2.android.common.rx.requestLocationPermission
+import me.li2.android.common.rx.checkAndRequestLocationPermission
 
 /**
  * Show location permission ((allow, deny, deny & don't ask again)) and service prompt dialog
@@ -23,9 +24,10 @@ import me.li2.android.common.rx.requestLocationPermission
  * @param onResult will be executed when user made a choice.
  */
 fun FragmentActivity.ifLocationAllowed(
+        prompt: AlertDialog? = null,
         onError: (Throwable) -> Unit = {},
         onResult: (RequestLocationResult) -> Unit): Disposable {
-    return RequestLocationUtils.checkLocationPermissionAndService(this)
+    return RequestLocationUtils.checkLocationPermissionAndService(this, prompt)
             .subscribeBy(onNext = {
                 onResult(it)
             }, onError = {
@@ -56,8 +58,10 @@ fun FragmentActivity.openAppSettings(appId: String) {
 }
 
 private object RequestLocationUtils {
-    fun checkLocationPermissionAndService(activity: FragmentActivity): Observable<RequestLocationResult> {
-        return activity.requestLocationPermission()
+    fun checkLocationPermissionAndService(activity: FragmentActivity,
+                                          prompt: AlertDialog? = null): Observable<RequestLocationResult> {
+        return activity.checkAndRequestLocationPermission(prompt)
+                .take(1)
                 .flatMap { permissionResult ->
                     when (permissionResult) {
                         PermissionResult.GRANTED -> {

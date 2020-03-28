@@ -32,6 +32,9 @@ allprojects {
         vMinSdk = 19
         vTargetSdk = 29
 
+        // My Libraries Dependencies
+        vLi2Common = '0.1.5'
+
         // Android X Dependencies
         vAndroidxAppcompat = '1.1.0'
         vAndroidxCoreKtx = '1.2.0'
@@ -39,7 +42,7 @@ allprojects {
         // Google Dependencies
         vGoogleMaterial = '1.2.0-alpha05'
         vGooglePlaces = '2.2.0'
-        vGooglePlayService = "17.2.0"
+        vGooglePlayService = "17.2.1"
 
         // Rx Dependencies
         vRxActivityResult = '2.2.1'

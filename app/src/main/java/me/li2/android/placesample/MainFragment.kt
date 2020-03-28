@@ -45,7 +45,7 @@ class MainFragment : Fragment() {
         placeAutoComplete = PlaceAutoComplete(view.context, apiKey)
 
         compositeDisposable += btn_get_last_known_location.clicks().throttleFirstShort().subscribe {
-            activity?.ifLocationAllowed(onError = {
+            activity?.ifLocationAllowed(locationPermissionPrompt(requireContext()), onError = {
                 toast(it.message.toString())
             }, onResult = { result: RequestLocationResult ->
                 when (result) {
@@ -54,7 +54,9 @@ class MainFragment : Fragment() {
                         // it's good time to get last know location
                         requestLastLocation()
                     }
-                    RequestLocationResult.PERMISSION_DENIED,
+                    RequestLocationResult.PERMISSION_DENIED -> {
+                        toast("permission denied ${System.currentTimeMillis()}")
+                    }
                     RequestLocationResult.PERMISSION_DENIED_NOT_ASK_AGAIN -> {
                         // location permission denied, go to App settings
                         activity?.openAppSettings(view.context.packageName)

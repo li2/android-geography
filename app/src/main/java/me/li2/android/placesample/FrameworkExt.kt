@@ -1,12 +1,15 @@
 package me.li2.android.placesample
 
+import android.content.Context
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,4 +50,16 @@ fun setImageUrl(view: ImageView, src: String) {
     Glide.with(view.context)
         .load(src)
         .into(view)
+}
+
+/**
+ * Location permission request prompt.
+ */
+fun locationPermissionPrompt(context: Context): AlertDialog {
+    return MaterialAlertDialogBuilder(context)
+            .setTitle("\"Demo App\" Would Like to Access the Location")
+            .setMessage("This will let you search place, get your current location")
+            .setPositiveButton("Yep!", null)
+            .setNegativeButton("Nope!", null)
+            .create() // MUST NOT show()
 }
