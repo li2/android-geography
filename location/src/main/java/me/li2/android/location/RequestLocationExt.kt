@@ -5,7 +5,6 @@
 package me.li2.android.location
 
 import android.content.Intent
-import android.net.Uri
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
@@ -46,15 +45,6 @@ fun FragmentActivity.openSystemLocationSetting(onResult: (Boolean) -> Unit): Dis
             .subscribeBy {
                 onResult(LocationServiceUtil.isLocationServiceEnabled(this))
             }
-}
-
-/**
- * Open application settings page.
- *
- * @param appId application ID
- */
-fun FragmentActivity.openAppSettings(appId: String) {
-     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$appId")))
 }
 
 private object RequestLocationUtils {

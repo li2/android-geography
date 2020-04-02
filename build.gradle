@@ -33,7 +33,7 @@ allprojects {
         vTargetSdk = 29
 
         // My Libraries Dependencies
-        vLi2Common = '0.1.5'
+        vLi2Common = '0.1.6'
 
         // Android X Dependencies
         vAndroidxAppcompat = '1.1.0'

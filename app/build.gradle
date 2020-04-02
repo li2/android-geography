@@ -42,6 +42,7 @@ dependencies {
     implementation project(':location')
     implementation project(':maps')
     implementation project(':place')
+    implementation "com.github.li2:android-common:$rootProject.vLi2Common"
 
     implementation libs.jetbrains.kotlin_stdlib_jdk7
     implementation libs.androidx.appcompat

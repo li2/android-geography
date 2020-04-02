@@ -12,10 +12,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_main.*
+import me.li2.android.common.framework.openAppSettings
 import me.li2.android.location.LastKnownLocationUtils.requestLastKnownLocation
 import me.li2.android.location.RequestLocationResult
 import me.li2.android.location.ifLocationAllowed
-import me.li2.android.location.openAppSettings
 import me.li2.android.location.openSystemLocationSetting
 import me.li2.android.maps.MapType
 import me.li2.android.maps.MapsStaticUtil.generateMapStaticImageUrl
