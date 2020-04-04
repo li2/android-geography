@@ -1,33 +1,22 @@
 [![](https://jitpack.io/v/li2/android-place.svg)](https://jitpack.io/#li2/android-place)
 
 
-##  Google Place Autocomplete & Search in Rx
+#  Geography Library - Android
 
-This library is a wrapper of Google Place SDK in Rx:
+A library to wrap Google Place Autocomplete SDK,  also get last known location in Rx  to break with the OnActivityResult and callback implementation.
 
-- Two options to search place:
-    - Option 1: Launch built-in autocomplete activity
-    - Option 2: Get place predictions programmatically
-- Use Rx to break with the OnActivityResult and callback implementation.
-- Geocoder to get address components from latLng and address full name.
+Usage sample: [MainFragment](https://github.com/li2/android-place/blob/master/app/src/main/java/me/li2/android/placesample/MainFragment.kt)
 
-<img width="300" alt="android-form-validation" src="https://github.com/li2/android-place/blob/master/place_autocomplete.gif">
+## Usage -  Google Place Autocomplete
 
-Further reading https://medium.com/@li2/android-practice-google-place-autocomplete-search-in-rx-79686271d840
+Two options to search place by Google Place SDK:
 
+- Option 1: Launch built-in autocomplete activity
+- Option 2: Get place predictions programmatically
 
-## Android Last Known Location (location permission and service)
+Further reading [https://medium.com/@li2/android-practice-google-place-autocomplete-search-in-rx-79686271d840](https://medium.com/@li2/android-practice-google-place-autocomplete-search-in-rx-79686271d840)
 
-This library provices
-- Rx way to request location permission and service,
-- Rx way to get last known location,
-- Extension functions to open system location settings and App settings page.
-
-
-## Usage
-
-[MainFragment](https://github.com/li2/android-place/blob/master/app/src/main/java/me/li2/android/placesample/MainFragment.kt)
-
+<img width="300" alt="android-form-validation" src="screenshots/place_autocomplete.gif">
 
 ```kotlin
 val placeAutoComplete = PlaceAutoComplete(context, context.getString(R.string.google_api_key))
@@ -43,7 +32,23 @@ placeAutoComplete.getPlacePredictions(query)
         .subscribeBy(onNext = { predictions: List<AutocompletePrediction> ->
         }, onError = {
         })  
+```
 
+## Usage - Geocoder address components
+
+```kotlin
+fun getAddressComponents(context: Context, lat: Double, lng: Double): AddressComponents?
+fun getAddressComponents(context: Context, addressName: String): AddressComponents?
+```
+
+
+## Usage - Last Known Location
+
+- Rx way to request location permission and service,
+- Rx way to get last known location,
+- Extension functions to open system location settings and App settings page.
+
+```kotlin
 activity?.ifLocationAllowed(onError = {
     toast(it.message.toString())
 }, onResult = { result: RequestLocationResult ->
@@ -53,7 +58,9 @@ activity?.ifLocationAllowed(onError = {
             // it's good time to get last know location
             requestLastKnownLocation()
         }
-        RequestLocationResult.PERMISSION_DENIED,
+        RequestLocationResult.PERMISSION_DENIED -> {
+            toast("permission denied")
+        }
         RequestLocationResult.PERMISSION_DENIED_NOT_ASK_AGAIN -> {
             // location permission denied, go to App settings
             activity?.openAppSettings(context.packageName)
@@ -65,13 +72,30 @@ activity?.ifLocationAllowed(onError = {
     }
 })
 
-LastKnownLocationUtils.requestLastKnownLocation(context)
-    .subscribeBy(onNext = { location ->
-        GeocoderUtils.getAddressComponents(context, location.latitude, location.longitude)
-    }, onError = { exception ->
-    })
+private fun requestLastLocation() {
+    LastKnownLocationUtils.requestLastKnownLocation(context)
+        .subscribeBy(onNext = { location ->
+            GeocoderUtils.getAddressComponents(context, location.latitude, location.longitude)
+        }, onError = { exception ->
+        })
+}
 ```
 
+## Usage - Map
+
+```kotlin
+val marker1 = MarkerInfo("blue", listOf("62.107733,-145.5419"), 'S')
+val marker2 = MarkerInfo("yellow", listOf("Tok, AK"), 'C', icon = "https://raw.githubusercontent.com/li2/android-geography/master/panda.png")
+val marker3 = MarkerInfo("green", listOf("Delta Junction, AK"), size = MarkerInfo.MarkerSize.TINY)
+generateMapStaticImageUrl(
+    apiKey = apiKey,
+    central = "63.259591,-144.667969",
+    mapType = MapType.SATELLITE,
+    markers = listOf(marker1, marker2, marker3),
+    size = "400x400",
+    zoomLevel = 6)
+```
+<img width="300" alt="static-map-image" src="screenshots/static-map-image.png">
 
 
 ## Download
@@ -81,7 +105,6 @@ implementation 'com.github.li2.android-geography:location:latest_version'
 implementation 'com.github.li2.android-geography:maps:latest_version'
 implementation 'com.github.li2.android-geography:place:latest_version'
 ```
-
 
 
 ## License
