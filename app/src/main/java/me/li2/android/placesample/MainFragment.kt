@@ -12,11 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_main.*
-import me.li2.android.common.framework.openAppSettings
 import me.li2.android.location.LastKnownLocationUtils.requestLastKnownLocation
-import me.li2.android.location.RequestLocationResult
-import me.li2.android.location.ifLocationAllowed
-import me.li2.android.location.openSystemLocationSetting
 import me.li2.android.maps.MapType
 import me.li2.android.maps.MapsStaticUtil.generateMapStaticImageUrl
 import me.li2.android.maps.MarkerInfo
@@ -45,28 +41,9 @@ class MainFragment : Fragment() {
         placeAutoComplete = PlaceAutoComplete(view.context, apiKey)
 
         compositeDisposable += btn_get_last_known_location.clicks().throttleFirstShort().subscribe {
-            activity?.ifLocationAllowed(locationPermissionPrompt(requireContext()), onError = {
-                toast(it.message.toString())
-            }, onResult = { result: RequestLocationResult ->
-                when (result) {
-                    RequestLocationResult.ALLOWED -> {
-                        // location permission granted and service is on,
-                        // it's good time to get last know location
-                        requestLastLocation()
-                    }
-                    RequestLocationResult.PERMISSION_DENIED -> {
-                        toast("permission denied ${System.currentTimeMillis()}")
-                    }
-                    RequestLocationResult.PERMISSION_DENIED_NOT_ASK_AGAIN -> {
-                        // location permission denied, go to App settings
-                        activity?.openAppSettings(view.context.packageName)
-                    }
-                    RequestLocationResult.SERVICE_OFF -> {
-                        // location service is turned off, go to system settings
-                        activity?.openSystemLocationSetting { isServiceOn -> }
-                    }
-                }
-            })
+            doWithLocationPermission {
+                requestLastLocation()
+            }
         }
 
         compositeDisposable += btn_launch_autocomplete_activity.clicks().subscribe {

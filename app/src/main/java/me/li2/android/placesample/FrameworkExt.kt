@@ -14,6 +14,10 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import me.li2.android.common.framework.openAppSettings
+import me.li2.android.location.RequestLocationResult
+import me.li2.android.location.ifLocationAllowed
+import me.li2.android.location.openSystemLocationSetting
 import java.util.concurrent.TimeUnit
 
 fun <T> Observable<T>.forUi(): Observable<T> =
@@ -44,7 +48,6 @@ fun setViewVisibility(view: View, value: Boolean?) {
     view.visibility = if (value == true) View.VISIBLE else View.GONE
 }
 
-
 @BindingAdapter("android:src")
 fun setImageUrl(view: ImageView, src: String) {
     Glide.with(view.context)
@@ -55,11 +58,36 @@ fun setImageUrl(view: ImageView, src: String) {
 /**
  * Location permission request prompt.
  */
-fun locationPermissionPrompt(context: Context): AlertDialog {
+private fun locationPermissionPrompt(context: Context): AlertDialog {
     return MaterialAlertDialogBuilder(context)
-            .setTitle("\"Demo App\" Would Like to Access the Location")
-            .setMessage("This will let you search place, get your current location")
-            .setPositiveButton("Yep!", null)
-            .setNegativeButton("Nope!", null)
-            .create() // MUST NOT show()
+        .setTitle("\"Demo App\" Would Like to Access the Location")
+        .setMessage("This will let you search place, get your current location")
+        .setPositiveButton("Yep!", null)
+        .setNegativeButton("Nope!", null)
+        .create() // MUST NOT show()
+}
+
+fun Fragment.doWithLocationPermission(action: () -> Unit) {
+    activity?.ifLocationAllowed(locationPermissionPrompt(requireContext()), onError = {
+        toast(it.message.toString())
+    }, onResult = { result: RequestLocationResult ->
+        when (result) {
+            RequestLocationResult.ALLOWED -> {
+                // location permission granted and service is on,
+                // it's good time to get last know location
+                action()
+            }
+            RequestLocationResult.PERMISSION_DENIED -> {
+                toast("permission denied ${System.currentTimeMillis()}")
+            }
+            RequestLocationResult.PERMISSION_DENIED_NOT_ASK_AGAIN -> {
+                // location permission denied, go to App settings
+                activity?.openAppSettings(requireContext().packageName)
+            }
+            RequestLocationResult.SERVICE_OFF -> {
+                // location service is turned off, go to system settings
+                activity?.openSystemLocationSetting { isServiceOn -> }
+            }
+        }
+    })
 }
