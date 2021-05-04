@@ -9,11 +9,13 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.petarmarijanovic.rxactivityresult.RxActivityResult
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
+import hu.akarnokd.rxjava3.bridge.RxJavaBridge
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import me.li2.android.common.rx.PermissionResult
 import me.li2.android.common.rx.checkAndRequestLocationPermission
+
 
 /**
  * Show location permission ((allow, deny, deny & don't ask again)) and service prompt dialog
@@ -42,6 +44,7 @@ fun FragmentActivity.ifLocationAllowed(
 fun FragmentActivity.openSystemLocationSetting(onResult: (Boolean) -> Unit): Disposable {
     return RxActivityResult(this)
             .start(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            .`as`(RxJavaBridge.toV3Single())
             .subscribeBy {
                 onResult(LocationServiceUtil.isLocationServiceEnabled(this))
             }

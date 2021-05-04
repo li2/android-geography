@@ -9,7 +9,7 @@ android {
         minSdkVersion vMinSdk
         targetSdkVersion vTargetSdk
         versionCode 1
-        versionName "0.3.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -38,8 +38,9 @@ dependencies {
     api "com.google.android.libraries.places:places:$rootProject.vGooglePlaces"
 
     //Rx
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.vRxAndroid"
+    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.vRxAndroid"
     implementation "com.petarmarijanovic:rx-activity-result:$rootProject.vRxActivityResult"
+    implementation "com.github.akarnokd:rxjava3-bridge:3.0.0"
 
     //Timber
     implementation "com.jakewharton.timber:timber:$vTimber"

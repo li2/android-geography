@@ -17,8 +17,9 @@ import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.petarmarijanovic.rxactivityresult.RxActivityResult
-import io.reactivex.Observable
-import io.reactivex.Single
+import hu.akarnokd.rxjava3.bridge.RxJavaBridge
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 /**
  * Search places with Google Places SDK in the following aspects:
@@ -74,6 +75,7 @@ class PlaceAutoComplete(private val context: Context, apiKey: String) {
                 .build(activity)
         return RxActivityResult(activity)
                 .start(intent)
+                .`as`(RxJavaBridge.toV3Single())
                 .map { result ->
                     when (result.resultCode) {
                         Activity.RESULT_OK -> Autocomplete.getPlaceFromIntent(result.data)

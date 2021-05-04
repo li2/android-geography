@@ -10,9 +10,9 @@ import android.location.Location
 import android.location.LocationManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import me.li2.android.common.rx.isLocationPermissionGranted
 import me.li2.android.location.LocationServiceUtil.isLocationServiceEnabled
 

@@ -1,5 +1,6 @@
 package me.li2.android.location
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.os.Looper
@@ -8,8 +9,8 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.google.android.gms.location.*
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableEmitter
 
 /**
  * https://developer.android.com/training/location/retrieve-current
@@ -20,6 +21,7 @@ internal class FusedLocationProvider(context: Context) : LifecycleObserver {
     private var isRequesting = false
     private lateinit var locationCallback: LocationCallback
 
+    @SuppressLint("MissingPermission")
     fun requestLastLocation(): Observable<Location> {
         return Observable.create { emitter ->
             client.lastLocation.addOnCompleteListener { task ->
@@ -33,6 +35,7 @@ internal class FusedLocationProvider(context: Context) : LifecycleObserver {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun startLocationUpdates(emitter: ObservableEmitter<Location>) {
         if (isRequesting) return
         locationCallback = object : LocationCallback() {

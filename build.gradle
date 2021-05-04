@@ -4,7 +4,7 @@ buildscript {
     // Specify global library versions.
     apply from: 'library_versions.gradle'
     ext.vKotlin = '1.3.61'
-    ext.vGradle = '3.5.3'
+    ext.vGradle = '4.1.2'
     repositories {
         google()
         jcenter()
@@ -33,7 +33,7 @@ allprojects {
         vTargetSdk = 29
 
         // My Libraries Dependencies
-        vLi2Common = '0.1.6'
+        vLi2Common = '0.2.1'
 
         // Android X Dependencies
         vAndroidxAppcompat = '1.1.0'
@@ -46,9 +46,9 @@ allprojects {
 
         // Rx Dependencies
         vRxActivityResult = '2.2.1'
-        vRxAndroid = '2.1.1'
-        vRxBinding = '3.0.0-alpha2'
-        vRxKotlin = '2.3.0'
+        vRxAndroid = '3.0.0'
+        vRxBinding = '4.0.0'
+        vRxKotlin = '3.0.1'
 
         // Misc
         vTimber = "4.7.1"

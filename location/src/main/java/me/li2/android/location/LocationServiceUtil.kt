@@ -9,8 +9,10 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.petarmarijanovic.rxactivityresult.RxActivityResult
-import io.reactivex.Observable
-import io.reactivex.rxkotlin.subscribeBy
+import hu.akarnokd.rxjava3.bridge.RxJavaBridge
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.subscribeBy
+
 
 internal object LocationServiceUtil {
 
@@ -36,11 +38,13 @@ internal object LocationServiceUtil {
                 if (exception is ResolvableApiException) {
                     try {
                         // Show the dialog by calling startResolutionForResult() in Rx
-                        RxActivityResult(activity).start(exception.resolution).subscribeBy(onSuccess = {
-                            // resultCode is RESULT_CANCELED when user click Ok, this issue happens on Pixel2 Android 10, it works on Nexus5 Android 6
-                            // https://issuetracker.google.com/issues/118347902
-                            emitter.onNext(isLocationServiceEnabled(activity))
-                            emitter.onComplete()
+                        RxActivityResult(activity).start(exception.resolution)
+                            .`as`(RxJavaBridge.toV3Single())
+                            .subscribeBy(onSuccess = {
+                                // resultCode is RESULT_CANCELED when user click Ok, this issue happens on Pixel2 Android 10, it works on Nexus5 Android 6
+                                // https://issuetracker.google.com/issues/118347902
+                                emitter.onNext(isLocationServiceEnabled(activity))
+                                emitter.onComplete()
                         }, onError = {
                             emitter.onError(it)
                         })
