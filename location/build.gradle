@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion vCompileSdk
+    compileSdkVersion androidCompileSdk_version
 
     defaultConfig {
-        minSdkVersion vMinSdk
-        targetSdkVersion vTargetSdk
+        minSdkVersion androidMinSdk_version
+        targetSdkVersion androidTargetSdk_version
         versionCode 1
         versionName "1.0.0"
 
@@ -27,26 +27,26 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.github.li2:android-common:$rootProject.vLi2Common"
+    implementation "com.github.li2:android-common:$vLi2Common"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$vKotlin"
-    implementation "androidx.appcompat:appcompat:$rootProject.vAndroidxAppcompat"
-    implementation "androidx.core:core-ktx:$rootProject.vAndroidxCoreKtx"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$androidx_appcompat_version"
+    implementation "androidx.core:core-ktx:$androidx_ktx_version"
 
-    testImplementation "junit:junit:$rootProject.vJunit"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.vAndroidxTestJunit"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.vAndroidxTestEspresso"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidxTestExt_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore_version"
 
     //Google Play Service
-    implementation "com.google.android.gms:play-services-base:$vGooglePlayService"
-    implementation "com.google.android.gms:play-services-location:17.0.0"
+    implementation "com.google.android.gms:play-services-base:$g_playservice_base_version"
+    implementation "com.google.android.gms:play-services-location:$g_playservice_location_version"
 
     //Rx
-    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.vRxAndroid"
-    implementation "io.reactivex.rxjava3:rxkotlin:$rootProject.vRxKotlin"
-    implementation "com.petarmarijanovic:rx-activity-result:$rootProject.vRxActivityResult"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxAndroid_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxKotlin_version"
+    implementation "com.petarmarijanovic:rx-activity-result:$rxActivityResult_version"
     implementation "com.github.akarnokd:rxjava3-bridge:3.0.0"
 
     //Timber
-    implementation "com.jakewharton.timber:timber:$vTimber"
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }

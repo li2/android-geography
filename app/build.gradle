@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion vCompileSdk
+    compileSdkVersion androidCompileSdk_version
 
     dataBinding {
         enabled = true
@@ -12,8 +12,8 @@ android {
 
     defaultConfig {
         applicationId 'me.li2.android.placesample'
-        minSdkVersion vMinSdk
-        targetSdkVersion vTargetSdk
+        minSdkVersion androidMinSdk_version
+        targetSdkVersion androidTargetSdk_version
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -42,28 +42,28 @@ dependencies {
     implementation project(':location')
     implementation project(':maps')
     implementation project(':place')
-    implementation "com.github.li2:android-common:$rootProject.vLi2Common"
+    implementation "com.github.li2:android-common:$vLi2Common"
 
     implementation libs.jetbrains.kotlin_stdlib_jdk7
     implementation libs.androidx.appcompat
     implementation libs.androidx.core_ktx
     implementation libs.androidx.constraintlayout
 
-    testImplementation "junit:junit:$rootProject.vJunit"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.vAndroidxTestJunit"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.vAndroidxTestEspresso"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidxTestExt_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore_version"
 
     //Google
-    implementation "com.google.android.material:material:$rootProject.vGoogleMaterial"
+    implementation "com.google.android.material:material:$g_material_version"
 
     //Rx
-    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.vRxAndroid"
-    implementation "io.reactivex.rxjava3:rxkotlin:$rootProject.vRxKotlin"
-    implementation "com.jakewharton.rxbinding4:rxbinding:$rootProject.vRxBinding"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxAndroid_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rxKotlin_version"
+    implementation "com.jakewharton.rxbinding4:rxbinding:$rxbinding4_version"
 
     //Timber
-    implementation "com.jakewharton.timber:timber:$vTimber"
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
     //Glide
-    implementation "com.github.bumptech.glide:glide:4.10.0"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
 }
