@@ -53,6 +53,7 @@ allprojects {
 
         // Misc
         timber_version = "4.7.1"
+        glide_version = "4.11.0"
 
         // Test Dependencies
         junit_version = '4.12'
