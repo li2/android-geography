@@ -1,4 +1,4 @@
-package me.li2.android.placesample
+package me.li2.android.geographysample
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

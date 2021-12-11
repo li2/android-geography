@@ -1,4 +1,4 @@
-package me.li2.android.placesample
+package me.li2.android.geographysample
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

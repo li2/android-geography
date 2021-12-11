@@ -1,4 +1,4 @@
-package me.li2.android.placesample
+package me.li2.android.geographysample
 
 import android.content.Context
 import android.view.View

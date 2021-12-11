@@ -1,4 +1,4 @@
-package me.li2.android.placesample
+package me.li2.android.geographysample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
